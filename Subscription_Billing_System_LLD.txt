@@ -1,0 +1,42 @@
+Task 2 : Subscription Billing System
+
+2.1 User Registration and Authentication
+
+
+-- Components: --
+> UserController: Handles user-related operations like registration.
+> UserService: Service layer for business logic related to user management.
+> UserRepository: Responsible for CRUD operations with the database.
+> CustomUserDetailsService: Manages user authentication and provides details to Spring Security.
+
+-- Flow: -- 
+> Registration: A user registers by providing a username, password, and role. The password is encoded using BCryptPasswordEncoder.
+> Authentication: When the user logs in, CustomUserDetailsService fetches the user’s data from the database, and Spring Security authenticates them using the provided credentials.
+> Security Configuration: The SecurityConfig class defines roles and access rules. Admins have access to admin endpoints, while users can access user-specific endpoints. 
+
+2.2 Subscription Plan Management
+
+
+-- Components: -- 
+> AdminPlanController: Admin controller to manage subscription plans.
+> SubscriptionPlanService: Business logic for handling subscription plan operations.
+> SubscriptionPlanRepository: Handles CRUD operations for subscription plans in the database.
+
+-- Flow: -- 
+> Admin Creates Plan: The admin can create a new subscription plan by sending a POST request to /api/admin/plans.
+> Get Plans: Both admin and user can fetch available subscription plans using a GET request to /api/admin/plans (admin) or /api/user/plans (user).
+> Plan Data: The SubscriptionPlan entity holds the information for each subscription plan, like name, price, and description. 
+
+3.3 Invoice Generation
+
+
+--Components: -- 
+> InvoiceController: Handles invoice-related API endpoints.
+> UserInvoiceController: Manages invoice generation specifically for users.
+> InvoiceService: Contains the logic for generating invoices.
+> InvoiceRepository: Responsible for database interaction for invoices. 
+
+-- Flow: -- 
+> Admin Generates Invoice: Admin can create invoices by sending a POST request to /api/invoices/generate.
+> User Views Invoice: A user can view invoices by sending a GET request to /api/user/invoices/{userId}.
+> Invoice Creation: On generating an invoice, a new Invoice object is created and saved in the database, linking it to a user and a subscription plan.

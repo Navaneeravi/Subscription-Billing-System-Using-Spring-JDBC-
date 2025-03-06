@@ -1,0 +1,102 @@
+Task 2 : Subscription Billing System 
+
+2.1. Admins API Requests
+
+
+-- Admin Registration -- 
+API Endpoint: POST /api/users/register
+Request URL: http://localhost:8080/api/users/register 
+
+Request Body (JSON):
+{
+    "name": "vijaram",
+    "password": "vijaram123",
+    "role": "ROLE_ADMIN"
+}
+
+Description: Registers an admin account. This can also be added directly to the database.
+
+
+-- Create a Subscription Plan --
+API Endpoint: POST /api/plans
+Request URL: http://localhost:8080/api/admin/plans 
+Authorization: Basic Auth(admin_username:admin_password) 
+
+Request Body (JSON):
+{
+    "name": "Gold Plan",
+    "price": 100.00,
+    "description": "Access to premium features with priority support"
+}
+
+Description: Admin can create a subscription plan. 
+
+
+-- View All Subscription Plans --
+API Endpoint: GET /api/plans
+Request URL: http://localhost:8080/api/admin/plans 
+Authorization: Basic Auth(admin_username:admin_password) 
+
+Description: Admin can view all available subscription plans.
+
+
+-- Get All Users --
+API Endpoint: GET /api/users
+Request URL: http://localhost:8080/api/users 
+Authorization: Basic Base64(admin_username:admin_password) 
+
+Description: Admin can view all registered users. 
+
+-- View All Invoices --
+API Endpoint: GET /api/invoices/all
+Request URL: http://localhost:8080/api/invoices/all 
+Authorization: Basic Base64(admin_username:admin_password) 
+
+Description: Admin can view all invoices in the system. 
+
+
+2.2 Users API Requests 
+
+
+-- User Registration --
+API Endpoint: POST /api/users/register
+Request URL: http://localhost:8080/api/users/register  
+
+Request Body (JSON):
+{
+    "name": "John Doe",
+    "password": "password123",
+    "role": "ROLE_USER"
+}
+
+Description: Registers a new user with a ROLE_USER. 
+
+-- View All Subscription Plans --
+API Endpoint: GET /api/plans
+Request URL: http://localhost:8080/api/user/plans
+Authorization: Basic Auth(user_username:user_password) 
+
+Description: Users can view all available subscription plans.
+
+
+-- Generate an Invoice --
+API Endpoint: POST /api/invoices/generate
+Request URL: http://localhost:8080/api/user/invoices/generate
+Authorization: Basic Auth(user_username:user_password)
+
+Request Body (JSON):
+{
+    "userId": 1,
+    "planId": 2,
+    "amount": 50.00
+}
+
+Description: Generates an invoice for a user based on the selected subscription plan.
+
+
+-- View User Invoices --
+API Endpoint: GET /api/invoices/user/{userId}
+Request URL: http://localhost:8080/api/invoices/user/11
+Authorization: Basic Auth(user_username:user_password) 
+
+Description: Users can view all their invoices.
